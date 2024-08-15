@@ -9,6 +9,7 @@ import '../../../common/widgets/custom_shpaes/containers/search_container.dart';
 import '../../../common/widgets/texts/section_heading.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
+import 'widgets/promo_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

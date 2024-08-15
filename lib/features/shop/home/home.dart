@@ -5,10 +5,10 @@ import 'package:t_store/utils/constants/sizes.dart';
 
 import '../../../common/widgets/custom_shpaes/containers/primary_header_container.dart';
 import '../../../common/widgets/custom_shpaes/containers/search_container.dart';
-import '../../../common/widgets/image_text_widgets/vertical_image_text.dart';
 import '../../../common/widgets/texts/section_heading.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
+import 'widgets/promo_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -47,7 +47,17 @@ class HomeScreen extends StatelessWidget {
                   ),
                 )
               ],
-            ))
+            )),
+            Padding(
+              padding: EdgeInsets.all(TSizes.defaultSpace),
+              child: TPromoSlider(
+                banners: [
+                  TImages.promoBanner1,
+                  TImages.promoBanner2,
+                  TImages.promoBanner3,
+                ],
+              ),
+            )
           ],
         ),
       ),

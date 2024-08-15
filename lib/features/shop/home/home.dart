@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 import '../../../common/widgets/custom_shpaes/containers/primary_header_container.dart';
 import '../../../common/widgets/custom_shpaes/containers/search_container.dart';
-import '../../../common/widgets/image_text_widgets/vertical_image_text.dart';
 import '../../../common/widgets/texts/section_heading.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
@@ -15,11 +15,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TPrimaryHeaderContainer(
+            const TPrimaryHeaderContainer(
                 child: Column(
               children: [
                 THomeAppBar(),
@@ -47,7 +47,28 @@ class HomeScreen extends StatelessWidget {
                   ),
                 )
               ],
-            ))
+            )),
+            Padding(
+              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              child: Column(
+                children: [
+                  const TPromoSlider(
+                    banners: [
+                      TImages.promoBanner1,
+                      TImages.promoBanner2,
+                      TImages.promoBanner3,
+                    ],
+                  ),
+                  const SizedBox(
+                  height: TSizes.spaceBtwSections,
+                ),
+                TGridLayout(
+                  itemCount: 4,
+                  itemBuilder: (_, index) => const TProductCardVertical(),
+                )
+                ],
+              ),
+            )
           ],
         ),
       ),

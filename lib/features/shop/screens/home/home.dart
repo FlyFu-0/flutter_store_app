@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
-import '../../../common/widgets/custom_shpaes/containers/primary_header_container.dart';
-import '../../../common/widgets/custom_shpaes/containers/search_container.dart';
-import '../../../common/widgets/texts/section_heading.dart';
+import '../../../../common/widgets/custom_shpaes/containers/primary_header_container.dart';
+import '../../../../common/widgets/custom_shpaes/containers/search_container.dart';
+import '../../../../common/widgets/texts/section_heading.dart';
 import 'widgets/home_appbar.dart';
 import 'widgets/home_categories.dart';
 import 'widgets/promo_slider.dart';
@@ -61,12 +62,19 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
-                TGridLayout(
-                  itemCount: 4,
-                  itemBuilder: (_, index) => const TProductCardVertical(),
-                )
+                    height: TSizes.spaceBtwSections,
+                  ),
+                  TSectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwSections / 2,
+                  ),
+                  TGridLayout(
+                    itemCount: 4,
+                    itemBuilder: (_, index) => const TProductCardVertical(),
+                  )
                 ],
               ),
             )

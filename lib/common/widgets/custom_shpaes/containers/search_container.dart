@@ -13,12 +13,14 @@ class TSearchContainer extends StatelessWidget {
     this.showBackground = true,
     this.showborder = true,
     this.onTap,
+    this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
   });
 
   final String text;
   final IconData? icon;
   final bool showBackground, showborder;
   final VoidCallback? onTap;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class TSearchContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+        padding: padding,
         child: Container(
           width: TDeviceUtils.getScreenWidth(context),
           padding: const EdgeInsets.all(TSizes.md),
@@ -39,7 +41,8 @@ class TSearchContainer extends StatelessWidget {
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(TSizes.cardRadiusLg),
               border: showborder
-                  ? Border.all(color: dark ? TColors.dark : TColors.light)
+                  ? Border.all(
+                      color: TColors.grey) //dark ? TColors.dark : TColors.light
                   : null),
           child: Row(
             children: [

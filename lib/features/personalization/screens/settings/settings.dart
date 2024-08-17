@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/custom_shpaes/containers/primary_header_container.dart';
@@ -30,7 +31,7 @@ class SettingsScreen extends StatelessWidget {
                         .apply(color: TColors.white),
                   ),
                 ),
-                TUserProfileTile(onPressed: () => const ProfileScreen(),),
+                TUserProfileTile(onPressed: () => Get.to(const ProfileScreen()),),
                 const SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),

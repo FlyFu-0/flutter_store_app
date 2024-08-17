@@ -27,27 +27,23 @@ class TCircularImage extends StatelessWidget {
   Widget build(BuildContext context) {
     var dark = THelperFunctions.isDarkMode(context);
 
-    return Row(
-      children: [
-        Container(
-          width: width,
-          height: height,
-          padding: EdgeInsets.all(padding),
-          decoration: BoxDecoration(
-            color: backgroundColor ?? (dark ? TColors.black : TColors.white),
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: Center(
-            child: Image(
-              fit: fit,
-              image: isNetworkImage
-                  ? NetworkImage(image)
-                  : AssetImage(image) as ImageProvider,
-              color: overlayColor,
-            ),
-          ),
-        )
-      ],
+    return Container(
+      width: width,
+      height: height,
+      padding: EdgeInsets.all(padding),
+      decoration: BoxDecoration(
+        color: backgroundColor ?? (dark ? TColors.black : TColors.white),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Center(
+        child: Image(
+          fit: fit,
+          image: isNetworkImage
+              ? NetworkImage(image)
+              : AssetImage(image) as ImageProvider,
+          color: overlayColor,
+        ),
+      ),
     );
   }
 }

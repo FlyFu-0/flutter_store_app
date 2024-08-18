@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class TProduceTitleText extends StatelessWidget {
-  const TProduceTitleText({
+class TProductTitleText extends StatelessWidget {
+  const TProductTitleText({
     super.key,
     required this.title,
     this.smallSize = false,
@@ -17,7 +17,7 @@ class TProduceTitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Green Nike Air Shoes',
+      title,
       style: Theme.of(context).textTheme.labelLarge,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,

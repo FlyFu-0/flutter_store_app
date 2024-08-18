@@ -4,10 +4,10 @@ import 'package:t_store/common/widgets/custom_shpaes/curved_edges/curved_edges.d
 class TCurvedEdgeWidget extends StatelessWidget {
   const TCurvedEdgeWidget({
     super.key,
-    this.child,
+    required this.child,
   });
 
-  final Widget? child;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-  import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/navigation_menu.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/theme/theme.dart';
 import 'package:get/get.dart';

@@ -5,9 +5,10 @@ import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/icons/circular_icon.dart';
 import 'package:t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
-import 'package:t_store/features/shop/screens/home/home.dart';
+import 'package:t_store/navigation_menu.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
+//TODO: add button not work
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
 
@@ -15,21 +16,28 @@ class WishlistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TAppBar(
-        title: Text('Wishlist', style: Theme.of(context).textTheme.headlineMedium,),
+        title: Text(
+          'Wishlist',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         actions: [
-          //TODO: Get.to homescreen without navmenu
-          TCircularIcon(icon: Iconsax.add, onPressed: () => Get.to(const HomeScreen()),)
+          TCircularIcon(
+            icon: Iconsax.add,
+            onPressed: () => Get.to(() => const NavigationMenu()),
+          )
         ],
       ),
-
       body: SingleChildScrollView(
-        child: Padding(padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: Column(
-          children: [
-            TGridLayout(itemCount: 
-            4, itemBuilder: (_, index) => const TProductCardVertical())
-          ],
-        ),),
+        child: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: Column(
+            children: [
+              TGridLayout(
+                  itemCount: 4,
+                  itemBuilder: (_, index) => const TProductCardVertical())
+            ],
+          ),
+        ),
       ),
     );
   }

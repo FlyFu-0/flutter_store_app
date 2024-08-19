@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/common/widgets/New%20folder/choice_chip.dart';
 import 'package:t_store/common/widgets/custom_shpaes/containers/rounded_container.dart';
 import 'package:t_store/common/widgets/texts/product_price_text.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
@@ -6,8 +7,6 @@ import 'package:t_store/common/widgets/texts/section_heading.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
-
-import '../../../../../common/widgets/chips/choice_chip.dart';
 
 class TProductAttributes extends StatelessWidget {
   const TProductAttributes({super.key});

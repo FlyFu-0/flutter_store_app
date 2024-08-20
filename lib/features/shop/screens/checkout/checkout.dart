@@ -36,6 +36,7 @@ class CheckoutScreen extends StatelessWidget {
             children: [
               const TCartItems(
                 showAddRemoveButtons: false,
+                physics: NeverScrollableScrollPhysics(),
               ),
               const SizedBox(
                 height: TSizes.spaceBtwSections,

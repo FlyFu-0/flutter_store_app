@@ -8,13 +8,17 @@ class TCartItems extends StatelessWidget {
   const TCartItems({
     super.key,
     this.showAddRemoveButtons = true,
+    this.physics = const AlwaysScrollableScrollPhysics()
   });
 
   final bool showAddRemoveButtons;
+  final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      //TODO: in videos no this param
+      physics: physics,
       separatorBuilder: (_, __) => const SizedBox(
         height: TSizes.spaceBtwSections,
       ),

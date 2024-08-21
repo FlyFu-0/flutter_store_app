@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/theme/theme.dart';
 import 'package:get/get.dart';
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const NavigationMenu()
+      home: const Scaffold(backgroundColor: TColors.primary, body: Center(child: CircularProgressIndicator(color: TColors.white,)))
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/common/widgets/New%20folder/choice_chip.dart';
+import 'package:t_store/common/widgets/chips/choice_chip.dart';
 import 'package:t_store/common/widgets/custom_shpaes/containers/rounded_container.dart';
 import 'package:t_store/common/widgets/texts/product_price_text.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';

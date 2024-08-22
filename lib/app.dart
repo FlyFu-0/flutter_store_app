@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/bindings/general_bindings.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/theme/theme.dart';
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
+      initialBinding: GeneralBindings(),
       debugShowCheckedModeBanner: false,
       home: const Scaffold(backgroundColor: TColors.primary, body: Center(child: CircularProgressIndicator(color: TColors.white,)))
     );

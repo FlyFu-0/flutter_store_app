@@ -23,7 +23,7 @@ class WishlistScreen extends StatelessWidget {
         actions: [
           TCircularIcon(
             icon: Iconsax.add,
-            onPressed: () => Get.to(() => const NavigationMenu()),
+            onPressed: () => Get.to(const NavigationMenu()),
           )
         ],
       ),

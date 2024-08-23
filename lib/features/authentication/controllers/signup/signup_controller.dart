@@ -4,9 +4,7 @@ import 'package:t_store/data/repositories/authentication/authentication_reposito
 import 'package:t_store/data/repositories/user/user_repository.dart';
 import 'package:t_store/features/authentication/screens/signup/verify_email.dart';
 import 'package:t_store/features/personalization/models/user_model.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/helpers/network_manager.dart';
-import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 
 class SignupController extends GetxController {
@@ -24,17 +22,17 @@ class SignupController extends GetxController {
 
   void signup() async {
     try {
-      TFullScreenLoader.openLoadingDialog(
-          'We are processing your data...', TImages.docerAnimation);
+      // TFullScreenLoader.openLoadingDialog(
+      //     'We are processing your data...', TImages.docerAnimation);
 
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
-        TFullScreenLoader.stopLoading();
+        // TFullScreenLoader.stopLoading();
         return;
       }
 
-      if (signupFormKey.currentState!.validate()) {
-        TFullScreenLoader.stopLoading();
+      if (!signupFormKey.currentState!.validate()) {
+        // TFullScreenLoader.stopLoading();
         return;
       }
 
@@ -52,28 +50,28 @@ class SignupController extends GetxController {
               email.text.trim(), password.text.trim());
 
       final newUser = UserModel(
+          id: userCredential.user!.uid,
           firstName: firstName.text.trim(),
           lastName: lastName.text.trim(),
-          phoneNumber: phoneNumber.text.trim(),
-          profilePicture: '',
-          id: userCredential.user!.uid,
           username: username.text.trim(),
-          email: email.text.trim());
+          phoneNumber: phoneNumber.text.trim(),
+          email: email.text.trim(),
+          profilePicture: '');
 
       final userRepository = Get.put(UserRepository());
       await userRepository.saveUserRecord(newUser);
 
-      TFullScreenLoader.stopLoading();
+      // TFullScreenLoader.stopLoading();
 
       TLoaders.successSnackBar(
           title: 'Congratulations',
           message: 'Your account has been created! Verify email to continue.');
 
-      Get.to(() => const VerifyEmailScreen());
+      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     } finally {
-      TFullScreenLoader.stopLoading();
+      // TFullScreenLoader.stopLoading();
     }
   }
 }

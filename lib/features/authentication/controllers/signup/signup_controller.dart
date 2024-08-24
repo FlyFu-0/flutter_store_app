@@ -4,9 +4,7 @@ import 'package:t_store/data/repositories/authentication/authentication_reposito
 import 'package:t_store/data/repositories/user/user_repository.dart';
 import 'package:t_store/features/authentication/screens/signup/verify_email.dart';
 import 'package:t_store/features/personalization/models/user_model.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/helpers/network_manager.dart';
-import 'package:t_store/utils/popups/full_screen_loader.dart';
 import 'package:t_store/utils/popups/loaders.dart';
 
 class SignupController extends GetxController {
@@ -22,7 +20,7 @@ class SignupController extends GetxController {
   final phoneNumber = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
-  void signup() async {
+  Future<void> signup() async {
     try {
       // TFullScreenLoader.openLoadingDialog(
       //     'We are processing your data...', TImages.docerAnimation);

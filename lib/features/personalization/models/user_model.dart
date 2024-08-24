@@ -22,6 +22,8 @@ class UserModel {
 
   String get formattedPhoneNo => TFormatter.formatPhoneNumber(phoneNumber);
 
+  static List<String> nameParts(fullName) => fullName.split(' ');
+
   static String generateUsername(fullName) {
     List<String> nameParts = fullName.split(' ');
     String firstName = nameParts[0].toLowerCase();

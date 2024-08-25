@@ -12,7 +12,7 @@ import 'package:t_store/utils/popups/loaders.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
-
+  
   final hidePassword = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
@@ -136,6 +136,4 @@ class UserController extends GetxController {
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
-    }
-  }
 }

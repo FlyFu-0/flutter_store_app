@@ -20,7 +20,7 @@ class SignupController extends GetxController {
   final phoneNumber = TextEditingController();
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
 
-  void signup() async {
+  Future<void> signup() async {
     try {
       // TFullScreenLoader.openLoadingDialog(
       //     'We are processing your data...', TImages.docerAnimation);

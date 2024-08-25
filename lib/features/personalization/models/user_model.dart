@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:t_store/utils/formatters/formatter.dart';
 
 class UserModel {
@@ -22,13 +23,15 @@ class UserModel {
 
   String get formattedPhoneNo => TFormatter.formatPhoneNumber(phoneNumber);
 
+  static List<String> nameParts(fullName) => fullName.split(' ');
+
   static String generateUsername(fullName) {
     List<String> nameParts = fullName.split(' ');
     String firstName = nameParts[0].toLowerCase();
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : ' ';
 
     String camelCaseUsername = '$firstName$lastName';
-    String usernameWithPrefix = 'cwt_$camelCaseUsername';
+    String usernameWithPrefix = 'me_$camelCaseUsername';
     return usernameWithPrefix;
   }
 
@@ -50,5 +53,23 @@ class UserModel {
       'PhoneNumber': phoneNumber,
       'ProfilePicture': profilePicture,
     };
+  }
+
+  factory UserModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> documnet) {
+    if (documnet.data() != null) {
+      final data = documnet.data()!;
+      return UserModel(
+        id: documnet.id,
+        firstName: data['FirstName'] ?? '',
+        lastName: data['LastName'] ?? '',
+        username: data['Username'] ?? '',
+        email: data['Email'] ?? '',
+        phoneNumber: data['PhoneNumber'] ?? '',
+        profilePicture: data['ProfilePicture'] ?? '',
+      );
+    } else {
+      return UserModel.empty();
+    }
   }
 }

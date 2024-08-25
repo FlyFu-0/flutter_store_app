@@ -12,7 +12,6 @@ class ResetPasswrod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //TODO: appbar cross get back page
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [

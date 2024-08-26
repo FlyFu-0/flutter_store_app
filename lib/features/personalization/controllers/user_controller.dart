@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:t_store/data/repositories/authentication/authentication_repository.dart';
 import 'package:t_store/data/repositories/user/user_repository.dart';
 import 'package:t_store/features/authentication/screens/login/login.dart';
@@ -12,8 +13,9 @@ import 'package:t_store/utils/popups/loaders.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
-  
+
   final hidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
@@ -42,23 +44,26 @@ class UserController extends GetxController {
 
   Future<void> saveUserRecord(UserCredential? userCredentials) async {
     try {
-      if (userCredentials != null) {
-        final nameParts =
-            UserModel.nameParts(userCredentials.user!.displayName ?? '');
-        final username =
-            UserModel.generateUsername(userCredentials.user!.displayName ?? '');
+      await fetchUserRecord();
+      if (user.value.id.isEmpty) {
+        if (userCredentials != null) {
+          final nameParts =
+              UserModel.nameParts(userCredentials.user!.displayName ?? '');
+          final username = UserModel.generateUsername(
+              userCredentials.user!.displayName ?? '');
 
-        final user = UserModel(
-            id: userCredentials.user!.uid,
-            firstName: nameParts[0],
-            lastName:
-                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-            username: username,
-            email: userCredentials.user!.email ?? '',
-            phoneNumber: userCredentials.user!.phoneNumber ?? '',
-            profilePicture: userCredentials.user!.photoURL ?? '');
+          final user = UserModel(
+              id: userCredentials.user!.uid,
+              firstName: nameParts[0],
+              lastName:
+                  nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+              username: username,
+              email: userCredentials.user!.email ?? '',
+              phoneNumber: userCredentials.user!.phoneNumber ?? '',
+              profilePicture: userCredentials.user!.photoURL ?? '');
 
-        await userRepository.saveUserRecord(user);
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       TLoaders.warningSnackBar(
@@ -98,8 +103,8 @@ class UserController extends GetxController {
           auth.auhtUser!.providerData.map((e) => e.providerId).first;
       if (provider.isNotEmpty) {
         if (provider == 'google.com') {
-          // await auth.signInWithGoogle();
-          // await auth.deleteAccount();
+          await auth.signInWithGoogle();
+          await auth.deleteAccount();
           // TFullScreenLoader.stopLoading();
           Get.offAll(() => const LoginScreen());
         } else if (provider == 'password') {
@@ -130,7 +135,8 @@ class UserController extends GetxController {
       }
 
       await AuthenticationRepository.instance
-          .reAuthenticateWithEmailAndPassword(verifyEmail.text.trim(), verifyPassword.text.trim());
+          .reAuthenticateWithEmailAndPassword(
+              verifyEmail.text.trim(), verifyPassword.text.trim());
       await AuthenticationRepository.instance.deleteAccount();
       // TFullScreenLoader.stopLoading();
       Get.offAll(() => const LoginScreen());

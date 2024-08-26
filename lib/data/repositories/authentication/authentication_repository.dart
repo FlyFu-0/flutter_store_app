@@ -117,17 +117,19 @@ class AuthenticationRepository extends GetxController {
 
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      // final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      GoogleSignIn googleSignIn = GoogleSignIn();
-    GoogleSignInAccount? googleSignInAccount =
-        kIsWeb ? await (googleSignIn.signInSilently()) : await (googleSignIn.signIn());
+      // GoogleSignIn googleSignIn = GoogleSignIn();
+      // GoogleSignInAccount? googleSignInAccount = kIsWeb
+      //     ? await (googleSignIn.signInSilently())
+      //     : await (googleSignIn.signIn());
 
-    if (kIsWeb && googleSignInAccount == null) googleSignInAccount = await (googleSignIn.signIn());
-
+      // if (kIsWeb && googleSignInAccount == null) {
+      //   googleSignInAccount = await (googleSignIn.signIn());
+      // }
 
       final GoogleSignInAuthentication? googleAuth =
-          await googleSignInAccount?.authentication;
+          await userAccount?.authentication;
 
       final credentials = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -135,7 +137,6 @@ class AuthenticationRepository extends GetxController {
       );
 
       return await _auth.signInWithCredential(credentials);
-
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -152,11 +153,13 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<void> logout() async {
+  Future<void> reAuthenticateWithEmailAndPassword(
+      String email, String password) async {
     try {
-      await GoogleSignIn().signOut();
-      await FirebaseAuth.instance.signOut();
-      Get.offAll(() => const LoginScreen());
+      AuthCredential credential =
+          EmailAuthProvider.credential(email: email, password: password);
+
+      await _auth.currentUser?.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -170,13 +173,11 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  Future<void> reAuthenticateWithEmailAndPassword(
-      String email, String password) async {
+  Future<void> logout() async {
     try {
-      AuthCredential credential =
-          EmailAuthProvider.credential(email: email, password: password);
-
-      await _auth.currentUser?.reauthenticateWithCredential(credential);
+      await GoogleSignIn().signOut();
+      await FirebaseAuth.instance.signOut();
+      Get.offAll(() => const LoginScreen());
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {

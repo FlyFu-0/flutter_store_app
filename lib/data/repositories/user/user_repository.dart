@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:t_store/data/repositories/authentication/authentication_repository.dart';
 import 'package:t_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:t_store/utils/exceptions/platform_exceptions.dart';
@@ -78,7 +83,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code);
     } catch (e) {
-      throw 'Somting went wrong. Please, try again';
+      throw 'Something went wrong. Please, try again';
     }
   }
 
@@ -117,7 +122,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code);
     } catch (e) {
-      throw 'Somting went wrong. Please, try again';
+      throw 'Somting went wrong. Please, try again $e';
     }
   }
 }

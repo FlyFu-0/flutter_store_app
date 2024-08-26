@@ -95,4 +95,29 @@ class UserRepository extends GetxController {
       throw 'Somting went wrong. Please, try again';
     }
   }
+
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      if (kIsWeb) {
+        final ref = FirebaseStorage.instance.ref(path).child(image.name);
+        // Используйте putData вместо putFile для веба
+        final uploadTask = ref.putData(await image.readAsBytes());
+        final snapshot = await uploadTask;
+        final url = await snapshot.ref.getDownloadURL();
+        return url;
+      }
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const FormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code);
+    } catch (e) {
+      throw 'Somting went wrong. Please, try again';
+    }
+  }
 }

@@ -136,4 +136,38 @@ class UserController extends GetxController {
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  Future<void> uploadUserProfilePicture() async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+
+
+      if (image != null) {
+        imageUploading.value = true;
+        final imageUrl =
+            await userRepository.uploadImage('Users/Images/Profile/', image);
+
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSignleField(json);
+
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+
+        TLoaders.successSnackBar(
+            title: 'Congratulations',
+            message: 'Your Profile Image has been updated!');
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(
+          title: 'OnSnap', message: 'Something went wrong $e');
+    } finally {
+      imageUploading.value = false;
+    }
+  }
 }

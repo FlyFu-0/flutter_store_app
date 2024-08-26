@@ -171,7 +171,7 @@ class UserController extends GetxController {
       }
     } catch (e) {
       TLoaders.errorSnackBar(
-          title: 'OnSnap 1!', message: 'Something went wrong $e');
+          title: 'OnSnap', message: 'Something went wrong $e');
     } finally {
       imageUploading.value = false;
     }

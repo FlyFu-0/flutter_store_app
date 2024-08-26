@@ -122,7 +122,6 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code);
     } catch (e) {
-      print(e);
       throw 'Somting went wrong. Please, try again $e';
     }
   }

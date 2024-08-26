@@ -101,7 +101,6 @@ class TSignupForm extends StatelessWidget {
             const SizedBox(
               height: TSizes.spaceBtwInputFields,
             ),
-            // TODO: decide checkbox positioned
             const TTermsAndConditionCheckbox(),
 
             const SizedBox(

@@ -15,10 +15,10 @@ class OrderScreen extends StatelessWidget {
             'My Orders',
             style: Theme.of(context).textTheme.headlineSmall,
           )),
-    body: Padding(
-      padding: const EdgeInsets.all(TSizes.defaultSpace),
-      child: TOrderListItems(),
-    ),
+      body: const Padding(
+        padding: EdgeInsets.all(TSizes.defaultSpace),
+        child: TOrderListItems(),
+      ),
     );
   }
 }

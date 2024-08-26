@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:t_store/data/repositories/authentication/authentication_repository.dart';
 import 'package:t_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:t_store/utils/exceptions/platform_exceptions.dart';
@@ -78,7 +83,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code);
     } catch (e) {
-      throw 'Somting went wrong. Please, try again';
+      throw 'Something went wrong. Please, try again';
     }
   }
 
@@ -93,6 +98,32 @@ class UserRepository extends GetxController {
       throw TPlatformException(e.code);
     } catch (e) {
       throw 'Somting went wrong. Please, try again';
+    }
+  }
+
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      if (kIsWeb) {
+        final ref = FirebaseStorage.instance.ref(path).child(image.name);
+        // Используйте putData вместо putFile для веба
+        final uploadTask = ref.putData(await image.readAsBytes());
+        final snapshot = await uploadTask;
+        final url = await snapshot.ref.getDownloadURL();
+        return url;
+      }
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const FormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code);
+    } catch (e) {
+      print(e);
+      throw 'Somting went wrong. Please, try again $e';
     }
   }
 }

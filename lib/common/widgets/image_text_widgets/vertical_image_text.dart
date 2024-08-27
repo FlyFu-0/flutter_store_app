@@ -37,7 +37,7 @@ class TVerticalImageText extends StatelessWidget {
               isNetworkImage: isNetworkImage,
               backgroundColor: backgroundColor,
               overlayColor: dark ? TColors.light : TColors.dark,
-            )
+            ),
             // Container(
             //   width: 56,
             //   height: 56,
@@ -55,21 +55,23 @@ class TVerticalImageText extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            // const SizedBox(
-            //   height: TSizes.spaceBtwItems / 2,
-            // ),
-            // SizedBox(
-            //   width: 55,
-            //   child: Text(
-            //     title,
-            //     style: Theme.of(context)
-            //         .textTheme
-            //         .labelMedium!
-            //         .apply(color: textColor),
-            //     maxLines: 1,
-            //     overflow: TextOverflow.ellipsis,
-            //   ),
-            // )
+            const SizedBox(
+              height: TSizes.spaceBtwItems / 2,
+            ),
+            SizedBox(
+              width: 55,
+              child: Center(
+                child: Text(
+                  title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium!
+                      .apply(color: textColor),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            )
           ],
         ),
       ),

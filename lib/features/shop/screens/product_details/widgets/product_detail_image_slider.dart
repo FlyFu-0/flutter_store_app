@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/appbar/appbar.dart';
 import 'package:t_store/common/widgets/custom_shpaes/curved_edges/curved_edge_widget.dart';
-import 'package:t_store/common/widgets/icons/circular_icon.dart';
 import 'package:t_store/common/widgets/images/rounded_image.dart';
+import 'package:t_store/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:t_store/features/shop/controllers/product/images_controller.dart';
 import 'package:t_store/features/shop/models/product_model.dart';
 import 'package:t_store/utils/constants/colors.dart';
@@ -71,7 +70,8 @@ class TProductImageSlider extends StatelessWidget {
 
                     return TRoundedImage(
                         width: 80,
-                        onPressed: () => controller.selectedProductImage.value = images[index],
+                        onPressed: () => controller.selectedProductImage.value =
+                            images[index],
                         isNetworkImage: true,
                         backgroundColor: dark ? TColors.black : TColors.white,
                         border: Border.all(
@@ -84,12 +84,11 @@ class TProductImageSlider extends StatelessWidget {
                 ),
               ),
             ),
-            const TAppBar(
+            TAppBar(
               showBackArrow: true,
               actions: [
-                TCircularIcon(
-                  icon: Iconsax.heart5,
-                  color: Colors.red,
+                TFavouriteIcon(
+                  productId: product.id,
                 )
               ],
             )

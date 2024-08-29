@@ -11,7 +11,6 @@ class ProductAttributeModel {
   //TODO: all String variables do constant
   factory ProductAttributeModel.fromJson(Map<String, dynamic> documnet) {
     final data = documnet;
-    print('in prod attr');
     if (data.isEmpty) {
       return ProductAttributeModel();
     }

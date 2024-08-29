@@ -30,7 +30,6 @@ class BrandRepository extends GetxController {
 
   Future<List<BrandModel>> getBrandsForCategory(String categoryId) async {
     try {
-      print(categoryId);
       QuerySnapshot brandCategoryQuery = await _db
           .collection('BrandCategory')
           .where('categoryId', isEqualTo: categoryId)
@@ -66,8 +65,7 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
-      print(e);
-      throw 'Something went wrong. Please, try again. brand2 $e';
+      throw 'Something went wrong. Please, try again.';
     }
   }
 }

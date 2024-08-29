@@ -50,7 +50,6 @@ class FavouritesController extends GetxController {
 
   void saveFavoritesToStorage() {
     final encodedFavorites = json.encode(favorites);
-    print('in saveFavoritesToStorage');
     TLocalStorage.instance()
         .saveData(TVariables.favoritesProductStorage, encodedFavorites);
   }

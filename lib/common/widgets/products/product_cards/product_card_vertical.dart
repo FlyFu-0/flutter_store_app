@@ -13,9 +13,9 @@ import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
-import '../../icons/circular_icon.dart';
 import '../../texts/product_title_text.dart';
 import '../../texts/product_price_text.dart';
+import '../favourite_icon/favourite_icon.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key, required this.product});
@@ -74,12 +74,11 @@ class TProductCardVertical extends StatelessWidget {
                         ),
                       ),
                     ),
-                  const Positioned(
+                  Positioned(
                       top: 0,
                       right: 0,
-                      child: TCircularIcon(
-                        icon: Iconsax.heart5,
-                        color: Colors.red,
+                      child: TFavouriteIcon(
+                        productId: product.id,
                       )),
                 ],
               ),

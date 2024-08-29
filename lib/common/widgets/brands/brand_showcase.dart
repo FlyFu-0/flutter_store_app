@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:t_store/common/widgets/brands/brand_card.dart';
 import 'package:t_store/common/widgets/custom_shpaes/containers/rounded_container.dart';
+import 'package:t_store/features/shop/models/brand_model.dart';
 import 'package:t_store/features/shop/screens/all_brands/brand_products.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -27,7 +28,10 @@ class TBrandShowcase extends StatelessWidget {
         children: [
           TBrandCard(
             showBorder: false,
-            onTap: () => Get.to(() => const BrandProductsScreen()),
+            onTap: () => Get.to(() => BrandProductsScreen(
+                  brand: BrandModel.empty(),
+                )),
+            brand: BrandModel.empty(),
           ),
           const SizedBox(
             height: TSizes.spaceBtwItems,

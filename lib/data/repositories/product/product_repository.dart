@@ -110,6 +110,13 @@ class ProductRepository extends GetxController {
           .map((doc) => doc['productId'] as String)
           .toList();
 
+        print('productCategoryQuery: ${productCategoryQuery.size}, categoryId: $categoryId');
+
+
+      for (var element in productIds) {
+        print('prodId: ${element}');
+      }
+
       final productsQuery = await _db
           .collection('Products')
           .where(FieldPath.documentId, whereIn: productIds)
@@ -125,6 +132,7 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
     } catch (e) {
+      print('getProductsForCategory. $e');
       throw 'Something went wrong. Please, try again.';
     }
   }

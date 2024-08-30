@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/styles/shadows.dart';
 import 'package:t_store/common/widgets/custom_shpaes/containers/rounded_container.dart';
 import 'package:t_store/common/widgets/images/rounded_image.dart';
@@ -16,6 +15,7 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 import '../../texts/product_title_text.dart';
 import '../../texts/product_price_text.dart';
 import '../favourite_icon/favourite_icon.dart';
+import 'product_cart_add_to_cart_button.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key, required this.product});
@@ -133,21 +133,8 @@ class TProductCardVertical extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                      color: TColors.dark,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(TSizes.cardRadiusMd),
-                          bottomRight:
-                              Radius.circular(TSizes.productImageRadius))),
-                  child: const SizedBox(
-                      width: TSizes.iconLg * 1.2,
-                      height: TSizes.iconLg * 1.2,
-                      child: Center(
-                          child: Icon(
-                        Iconsax.add,
-                        color: TColors.white,
-                      ))),
+                TProductCartAddToCartButton(
+                  product: product,
                 )
               ],
             ),

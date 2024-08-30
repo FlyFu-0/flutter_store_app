@@ -6,16 +6,24 @@ import 'package:t_store/common/widgets/products/favourite_icon/favourite_icon.da
 import 'package:t_store/common/widgets/texts/brand_title_text_with_verified_icon.dart';
 import 'package:t_store/common/widgets/texts/product_price_text.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
+import 'package:t_store/features/shop/controllers/product/product_controller.dart';
+import 'package:t_store/features/shop/models/product_model.dart';
 import 'package:t_store/utils/constants/colors.dart';
-import 'package:t_store/utils/constants/image_strings.dart';
+import 'package:t_store/utils/constants/enums.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
-  const TProductCardHorizontal({super.key});
+  const TProductCardHorizontal({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage =
+        controller.calculateSalePercentage(product.price, product.salePrice);
+
     final dark = THelperFunctions.isDarkMode(context);
 
     return Container(
@@ -34,33 +42,35 @@ class TProductCardHorizontal extends StatelessWidget {
             backgroundColor: dark ? TColors.dark : TColors.light,
             child: Stack(
               children: [
-                const SizedBox(
+                SizedBox(
                     height: 120,
                     width: 120,
                     child: TRoundedImage(
-                      imageUrl: TImages.productImage1,
+                      isNetworkImage: true,
+                      imageUrl: product.thumbnail,
                     )),
-                Positioned(
-                  top: 12,
-                  child: TRoundedContainer(
-                    radius: TSizes.sm,
-                    backgroundColor: TColors.secondary.withOpacity(.8),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: TSizes.sm, vertical: TSizes.xs),
-                    child: Text(
-                      '25%',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .apply(color: TColors.black),
+                if (salePercentage != null)
+                  Positioned(
+                    top: 12,
+                    child: TRoundedContainer(
+                      radius: TSizes.sm,
+                      backgroundColor: TColors.secondary.withOpacity(.8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: TSizes.sm, vertical: TSizes.xs),
+                      child: Text(
+                        '$salePercentage%',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .apply(color: TColors.black),
+                      ),
                     ),
                   ),
-                ),
-                const Positioned(
+                Positioned(
                     top: 0,
                     right: 0,
                     child: TFavouriteIcon(
-                      productId: '',
+                      productId: product.id,
                     )),
               ],
             ),
@@ -70,25 +80,51 @@ class TProductCardHorizontal extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: TSizes.sm, left: TSizes.sm),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TProductTitleText(
-                        title: 'Green Nuke Half Sleeves Shirt',
+                        title: product.title,
                         smallSize: true,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: TSizes.spaceBtwItems / 2,
                       ),
-                      TBrandTitleTextWithVerifiedIcon(title: 'Nike'),
+                      TBrandTitleTextWithVerifiedIcon(
+                          title: product.brand!.name),
                     ],
                   ),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Flexible(child: TProductPriceText(price: '256.0')),
+                      Flexible(
+                        child: Column(
+                          children: [
+                            if (product.productType ==
+                                    ProductType.single.toString() &&
+                                product.salePrice > 0)
+                              Padding(
+                                padding: const EdgeInsets.only(left: TSizes.sm),
+                                child: Text(product.price.toString(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium!
+                                        .apply(
+                                            decoration:
+                                                TextDecoration.lineThrough)),
+                              ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: TSizes.sm),
+                              child: TProductPriceText(
+                                price: controller.getProductPrice(product),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       Container(
                         decoration: const BoxDecoration(
                             color: TColors.dark,
@@ -106,7 +142,7 @@ class TProductCardHorizontal extends StatelessWidget {
                             ))),
                       )
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

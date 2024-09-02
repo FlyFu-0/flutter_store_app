@@ -100,7 +100,7 @@ class UserController extends GetxController {
 
       final auth = AuthenticationRepository.instance;
       final provider =
-          auth.auhtUser!.providerData.map((e) => e.providerId).first;
+          auth.auhtUser.providerData.map((e) => e.providerId).first;
       if (provider.isNotEmpty) {
         if (provider == 'google.com') {
           await auth.signInWithGoogle();

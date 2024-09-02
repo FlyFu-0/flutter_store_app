@@ -21,8 +21,7 @@ class TCartItems extends StatelessWidget {
 
     return Obx(
       () => ListView.separated(
-        //TODO: in videos no this param
-        // physics: physics,
+        physics: physics,
         separatorBuilder: (_, __) => const SizedBox(
           height: TSizes.spaceBtwSections,
         ),

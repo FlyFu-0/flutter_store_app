@@ -5,7 +5,6 @@ import 'package:t_store/features/shop/controllers/product/cart_controller.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 
-//TODO: in videos "App ui Design" different this class
 class TCartCounterIcon extends StatelessWidget {
   const TCartCounterIcon(
       {super.key,

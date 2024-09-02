@@ -10,7 +10,7 @@ class AddressModel {
   final String state;
   final String postalCode;
   final String country;
-  final DateTime? dateTime;
+  // final DateTime? dateTime;
   bool selectedAddress;
 
   AddressModel({
@@ -22,7 +22,7 @@ class AddressModel {
     required this.state,
     required this.postalCode,
     required this.country,
-    this.dateTime,
+    // this.dateTime,
     this.selectedAddress = true,
   });
 
@@ -36,6 +36,7 @@ class AddressModel {
       city: '',
       state: '',
       postalCode: '',
+      // dateTime: DateTime.now(),
       country: '');
 
   Map<String, dynamic> toJson() {
@@ -48,39 +49,41 @@ class AddressModel {
       'State': state,
       'PostalCode': postalCode,
       'Country': country,
-      'DateTime': DateTime.now(),
+      // 'DateTime': DateTime.now(),
       'SelectedAddress': selectedAddress,
     };
   }
 
   factory AddressModel.fromMap(Map<String, dynamic> data) {
     return AddressModel(
-        id: data['Id'] as String,
-        name: data['Name'] as String,
-        phoneNumber: data['PhoneNumber'] as String,
-        street: data['Street'] as String,
-        city: data['City'] as String,
-        state: data['State'] as String,
-        postalCode: data['PostalCode'] as String,
-        country: data['Country'] as String,
-        selectedAddress: data['SelectedAddress'] as bool,
-        dateTime: data['DateTime'] as DateTime);
+      id: data['Id'] as String,
+      name: data['Name'] as String,
+      phoneNumber: data['PhoneNumber'] as String,
+      street: data['Street'] as String,
+      city: data['City'] as String,
+      state: data['State'] as String,
+      postalCode: data['PostalCode'] as String,
+      country: data['Country'] as String,
+      selectedAddress: data['SelectedAddress'] as bool,
+      // // dateTime: data['DateTime'] as DateTime
+    );
   }
 
   factory AddressModel.fromDocumnetSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
 
     return AddressModel(
-        id: snapshot.id,
-        name: data['Name'] ?? '',
-        phoneNumber: data['PhoneNumber'] ?? '',
-        street: data['Street'] ?? '',
-        city: data['City'] ?? '',
-        state: data['State'] ?? '',
-        postalCode: data['PostalCode'] ?? '',
-        country: data['Country'] ?? '',
-        selectedAddress: data['SelectedAddress'] as bool,
-        dateTime: (data['DateTime'] as Timestamp).toDate());
+      id: snapshot.id,
+      name: data['Name'] ?? '',
+      phoneNumber: data['PhoneNumber'] ?? '',
+      street: data['Street'] ?? '',
+      city: data['City'] ?? '',
+      state: data['State'] ?? '',
+      postalCode: data['PostalCode'] ?? '',
+      country: data['Country'] ?? '',
+      selectedAddress: data['SelectedAddress'] as bool,
+      // dateTime: (data['DateTime'] as Timestamp).toDate()
+    );
   }
 
   @override

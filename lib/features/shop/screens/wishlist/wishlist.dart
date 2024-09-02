@@ -13,12 +13,13 @@ import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/cloud_helper_functions.dart';
 
-//TODO: add button not work
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final navigationController = NavigationController.instance;
+
     final controller = FavouritesController.instance;
     return Scaffold(
       appBar: TAppBar(
@@ -29,7 +30,10 @@ class WishlistScreen extends StatelessWidget {
         actions: [
           TCircularIcon(
             icon: Iconsax.add,
-            onPressed: () => Get.to(const NavigationMenu()),
+            // onPressed: () => Get.to(const NavigationMenu()),
+            onPressed: () {
+              navigationController.selectedIndex.value = 0;
+            },
           )
         ],
       ),
@@ -47,8 +51,9 @@ class WishlistScreen extends StatelessWidget {
                         animation: TImages.pencilAnimation,
                         showAction: true,
                         actionText: 'Let\'s add some',
-                        onActionPressed: () =>
-                            Get.off(() => const NavigationMenu()),
+                        onActionPressed: () {
+                          navigationController.selectedIndex.value = 0;
+                        },
                       );
 
                       const loader = TVerticalProductShimmer(

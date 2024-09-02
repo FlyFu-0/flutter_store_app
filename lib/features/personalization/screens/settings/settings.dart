@@ -35,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
                         .apply(color: TColors.white),
                   ),
                 ),
-                TUserProfileTile(onPressed: () => Get.to(const ProfileScreen()),),
+                TUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen()),),
                 const SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),

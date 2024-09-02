@@ -17,7 +17,6 @@ class VerifyEmailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(VerifyEmailController());
 
-    //TODO: editing email if user do mistake
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

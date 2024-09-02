@@ -21,7 +21,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '\$$subTotal',
+              subTotal.toStringAsFixed(2),
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -69,7 +69,7 @@ class TBillingAmountSection extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             Text(
-              '\$${TPricingCalculator.calculateTotalPrice(subTotal, 'US')}',
+              '\$${TPricingCalculator.calculateTotalPrice(subTotal, 'US').toStringAsFixed(2)}',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],

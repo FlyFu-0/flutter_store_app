@@ -33,7 +33,6 @@ class THorizontalProductShimmer extends StatelessWidget {
                 SizedBox(
                   height: TSizes.spaceBtwItems / 2,
                 ),
-                //TODO: shimmer effect for horizontal card
               ],
             )
           ],
